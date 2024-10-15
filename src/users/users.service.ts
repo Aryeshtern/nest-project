@@ -3,9 +3,9 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class UsersService {
     private users = [
-        { id: 1, name: 'John Doe', email: 'john@example.com', role: 'admin' },
-        { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'user' },
-        { id: 3, name: 'Alice Johnson', email: 'alice@example.com', role: 'user'},
+        { id: 1, name: 'John Doe', email: 'john@example.com', role: 'admin', password: '12345678'},
+        { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'user', password: '12345678' },
+        { id: 3, name: 'Alice Johnson', email: 'alice@example.com', role: 'user', password: '12345678'},
     ];
 
     public getAllUsers(role?: 'admin' | 'user'): any[] {
@@ -37,6 +37,14 @@ export class UsersService {
         newUser.id = Math.max(...this.users.map(user => user.id)) + 1; 
         this.users.push(newUser);
         return this.users;
+    }
+
+    getUserByUsername(username: string): any {
+        const user = this.users.find(user => user.name === username);
+        if (user) {
+            return user;
+        }
+        return null;
     }
 }
 

@@ -21,12 +21,13 @@ export class UsersController {
         return this.usersService.createUser(user);
     }
 
-    @Patch(':id')
     @UseGuards(AuthGuard) 
+    @Patch(':id')
     updateUser(@Param('id') id: string, @Body() userUpdate: {}) {
         return this.usersService.updateUser(id,userUpdate );
     }
 
+    @UseGuards(AuthGuard) 
     @Delete(':id')
     deleteUser(@Param('id') id: string) {
         return this.usersService.deleteUser(id)
